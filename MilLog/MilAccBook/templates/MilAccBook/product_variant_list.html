@@ -1,0 +1,15 @@
+{% block content %}
+<h1>Product Variant List</h1>
+  {% if product_variant_list %}
+<ul>
+    {% for pv in product_variant_list %}
+    <li>
+        <a href="{{ pv.get_absolute_url }}{{ pv.pk }}">{{ pv.product.name }}</a>
+        ({{ product.uom }}, {{ product.has_sort }})
+    </li>
+    {% endfor %}
+</ul>
+  {% else %}
+<p>There are no products in the book.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,11 @@
+__pycache__
+fixtures
+migrations
+db.sqlite3
+readme.html
+.vs
+bin
+lib
+lib64
+obj
+pyvenv.cfg
