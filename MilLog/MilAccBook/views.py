@@ -59,26 +59,26 @@ class ProductsView(ListView):
 #         return context
 
 """
-        var mainName = dbContext.Peers.Single(p => p.Name == "А7047").Name;
+        var mainName = dbContext.Peers.Single(p => p.Name == "Рђ7047").Name;
 
         // .........
         
         List<string> divisions1 = new List<string>();
         divisions1.Add(mainName);
 
-        var product = dbContext.Products.Single(p => p.Name == "Термос ТН-36");
+        var product = dbContext.Products.Single(p => p.Name == "РўРµСЂРјРѕСЃ РўРќ-36");
         var productVariant1 = dbContext.ProductVariants.Single(pv => pv.Product == product && pv.Price == 336);
-        // var product = dbContext.Products.Single(p => p.Name == "Коробка картонна");
+        // var product = dbContext.Products.Single(p => p.Name == "РљРѕСЂРѕР±РєР° РєР°СЂС‚РѕРЅРЅР°");
         // var productVariant1 = dbContext.ProductVariants.Single(pv => pv.Product == product && pv.Price == 0.5m);
-        // var product = dbContext.Products.Single(p => p.Name == "Сірники запалювальні б/к");
+        // var product = dbContext.Products.Single(p => p.Name == "РЎС–СЂРЅРёРєРё Р·Р°РїР°Р»СЋРІР°Р»СЊРЅС– Р±/Рє");
         // var productVariant1 = dbContext.ProductVariants.Single(pv => pv.Product == product);
-        // var product = dbContext.Products.Single(p => p.Name == "Раціон ДПНП-Р10");
+        // var product = dbContext.Products.Single(p => p.Name == "Р Р°С†С–РѕРЅ Р”РџРќРџ-Р 10");
         // var productVariant1 = dbContext.ProductVariants.Single(pv => pv.Product == product && pv.Price == 264);
         // var productVariant1 = dbContext.ProductVariants.Single(pv => pv.Product == product && pv.Price == 387);
-        // var product = dbContext.Products.Single(p => p.Name == "Раціон ДПНП-Р11");
+        // var product = dbContext.Products.Single(p => p.Name == "Р Р°С†С–РѕРЅ Р”РџРќРџ-Р 11");
         // var productVariant1 = dbContext.ProductVariants.Single(pv => pv.Product == product && pv.Price == 264);
         // var productVariant1 = dbContext.ProductVariants.Single(pv => pv.Product == product && pv.Price == 387);
-        // var product = dbContext.Products.Single(p => p.Name == "Раціон ДПНП-Р12");
+        // var product = dbContext.Products.Single(p => p.Name == "Р Р°С†С–РѕРЅ Р”РџРќРџ-Р 12");
         // var productVariant1 = dbContext.ProductVariants.Single(pv => pv.Product == product && pv.Price == 264);
         // var productVariant1 = dbContext.ProductVariants.Single(pv => pv.Product == product && pv.Price == 387);
 
@@ -217,21 +217,21 @@ class ProductsView(ListView):
         reportBuilder1.AppendLine("<html>\n<body>\n<table>\n");
         // Product Variant Journal report Header
         reportBuilder1.AppendLine("<tr>");
-        reportBuilder1.AppendLine("<th rowspan=\"4\">Дата запису</th>");
-        reportBuilder1.AppendLine("<th rowspan=\"4\">Найменування документа</th>");
-        reportBuilder1.AppendLine("<th rowspan=\"4\">Номер документа</th>");
-        reportBuilder1.AppendLine("<th rowspan=\"4\">Дата документа</th>");
-        reportBuilder1.AppendLine("<th rowspan=\"4\">Постачальник (одержувач)</th>");
-        reportBuilder1.AppendLine("<th rowspan=\"4\">Надійшло</th>");
-        reportBuilder1.AppendLine("<th rowspan=\"4\">Вибуло</th>");
-        reportBuilder1.AppendLine("<th rowspan=\"2\" colspan=\"6\">Перебуває згідно з документами</th>");
-        reportBuilder1.AppendLine("<th colspan=\"100%\">У тому числі на складі (у підрозділах, військових частинах)</th>");
+        reportBuilder1.AppendLine("<th rowspan=\"4\">Р”Р°С‚Р° Р·Р°РїРёСЃСѓ</th>");
+        reportBuilder1.AppendLine("<th rowspan=\"4\">РќР°Р№РјРµРЅСѓРІР°РЅРЅСЏ РґРѕРєСѓРјРµРЅС‚Р°</th>");
+        reportBuilder1.AppendLine("<th rowspan=\"4\">РќРѕРјРµСЂ РґРѕРєСѓРјРµРЅС‚Р°</th>");
+        reportBuilder1.AppendLine("<th rowspan=\"4\">Р”Р°С‚Р° РґРѕРєСѓРјРµРЅС‚Р°</th>");
+        reportBuilder1.AppendLine("<th rowspan=\"4\">РџРѕСЃС‚Р°С‡Р°Р»СЊРЅРёРє (РѕРґРµСЂР¶СѓРІР°С‡)</th>");
+        reportBuilder1.AppendLine("<th rowspan=\"4\">РќР°РґС–Р№С€Р»Рѕ</th>");
+        reportBuilder1.AppendLine("<th rowspan=\"4\">Р’РёР±СѓР»Рѕ</th>");
+        reportBuilder1.AppendLine("<th rowspan=\"2\" colspan=\"6\">РџРµСЂРµР±СѓРІР°С” Р·РіС–РґРЅРѕ Р· РґРѕРєСѓРјРµРЅС‚Р°РјРё</th>");
+        reportBuilder1.AppendLine("<th colspan=\"100%\">РЈ С‚РѕРјСѓ С‡РёСЃР»С– РЅР° СЃРєР»Р°РґС– (Сѓ РїС–РґСЂРѕР·РґС–Р»Р°С…, РІС–Р№СЃСЊРєРѕРІРёС… С‡Р°СЃС‚РёРЅР°С…)</th>");
         reportBuilder1.AppendLine("</tr><tr>");
         foreach (var item in divisions1)
         {
             if (item == mainName)
             {
-                reportBuilder1.AppendLine("<th colspan=\"6\">На складі</th>");
+                reportBuilder1.AppendLine("<th colspan=\"6\">РќР° СЃРєР»Р°РґС–</th>");
             }
             else
             {
@@ -239,12 +239,12 @@ class ProductsView(ListView):
             }
         }
         reportBuilder1.AppendLine("</tr><tr>");
-        reportBuilder1.AppendLine("<th rowspan=\"2\">Усього</th>");
-        reportBuilder1.AppendLine("<th colspan=\"5\">З них за категоріями (сортами)</th>");
+        reportBuilder1.AppendLine("<th rowspan=\"2\">РЈСЃСЊРѕРіРѕ</th>");
+        reportBuilder1.AppendLine("<th colspan=\"5\">Р— РЅРёС… Р·Р° РєР°С‚РµРіРѕСЂС–СЏРјРё (СЃРѕСЂС‚Р°РјРё)</th>");
         foreach (var item in divisions1)
         {
-            reportBuilder1.AppendLine("<th rowspan=\"2\">Усього</th>");
-            reportBuilder1.AppendLine("<th colspan=\"5\">З них за категоріями (сортами)</th>");
+            reportBuilder1.AppendLine("<th rowspan=\"2\">РЈСЃСЊРѕРіРѕ</th>");
+            reportBuilder1.AppendLine("<th colspan=\"5\">Р— РЅРёС… Р·Р° РєР°С‚РµРіРѕСЂС–СЏРјРё (СЃРѕСЂС‚Р°РјРё)</th>");
         }
         reportBuilder1.AppendLine("</tr><tr>");
         reportBuilder1.AppendLine("<th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>");
@@ -293,6 +293,7 @@ class ProductsView(ListView):
         File.WriteAllText(@"C:\Users\xXx\source\repos\report1.html", reportBuilder1.ToString());
 
 """
+
 class ProductVariantView(View):
     def get(self, request, *args, **kwargs):
         
