@@ -214,37 +214,37 @@ class ProductsView(ListView):
         }
 
         var reportBuilder1 = new StringBuilder();
-        reportBuilder1.AppendLine("<html>\n<body>\n<table>\n");
+        reportBuilder1.AppendLine("<html>\\n<body>\\n<table>\\n");
         // Product Variant Journal report Header
         reportBuilder1.AppendLine("<tr>");
-        reportBuilder1.AppendLine("<th rowspan=\"4\">Дата запису</th>");
-        reportBuilder1.AppendLine("<th rowspan=\"4\">Найменування документа</th>");
-        reportBuilder1.AppendLine("<th rowspan=\"4\">Номер документа</th>");
-        reportBuilder1.AppendLine("<th rowspan=\"4\">Дата документа</th>");
-        reportBuilder1.AppendLine("<th rowspan=\"4\">Постачальник (одержувач)</th>");
-        reportBuilder1.AppendLine("<th rowspan=\"4\">Надійшло</th>");
-        reportBuilder1.AppendLine("<th rowspan=\"4\">Вибуло</th>");
-        reportBuilder1.AppendLine("<th rowspan=\"2\" colspan=\"6\">Перебуває згідно з документами</th>");
-        reportBuilder1.AppendLine("<th colspan=\"100%\">У тому числі на складі (у підрозділах, військових частинах)</th>");
+        reportBuilder1.AppendLine("<th rowspan=\\"4\\">Дата запису</th>");
+        reportBuilder1.AppendLine("<th rowspan=\\"4\\">Найменування документа</th>");
+        reportBuilder1.AppendLine("<th rowspan=\\"4\\">Номер документа</th>");
+        reportBuilder1.AppendLine("<th rowspan=\\"4\\">Дата документа</th>");
+        reportBuilder1.AppendLine("<th rowspan=\\"4\\">Постачальник (одержувач)</th>");
+        reportBuilder1.AppendLine("<th rowspan=\\"4\\">Надійшло</th>");
+        reportBuilder1.AppendLine("<th rowspan=\\"4\\">Вибуло</th>");
+        reportBuilder1.AppendLine("<th rowspan=\\"2\\" colspan=\\"6\\">Перебуває згідно з документами</th>");
+        reportBuilder1.AppendLine("<th colspan=\\"100%\\">У тому числі на складі (у підрозділах, військових частинах)</th>");
         reportBuilder1.AppendLine("</tr><tr>");
         foreach (var item in divisions1)
         {
             if (item == mainName)
             {
-                reportBuilder1.AppendLine("<th colspan=\"6\">На складі</th>");
+                reportBuilder1.AppendLine("<th colspan=\\"6\\">На складі</th>");
             }
             else
             {
-                reportBuilder1.AppendLine("<th colspan=\"6\">" + item + "</th>");
+                reportBuilder1.AppendLine("<th colspan=\\"6\\">" + item + "</th>");
             }
         }
         reportBuilder1.AppendLine("</tr><tr>");
-        reportBuilder1.AppendLine("<th rowspan=\"2\">Усього</th>");
-        reportBuilder1.AppendLine("<th colspan=\"5\">З них за категоріями (сортами)</th>");
+        reportBuilder1.AppendLine("<th rowspan=\\"2\\">Усього</th>");
+        reportBuilder1.AppendLine("<th colspan=\\"5\\">З них за категоріями (сортами)</th>");
         foreach (var item in divisions1)
         {
-            reportBuilder1.AppendLine("<th rowspan=\"2\">Усього</th>");
-            reportBuilder1.AppendLine("<th colspan=\"5\">З них за категоріями (сортами)</th>");
+            reportBuilder1.AppendLine("<th rowspan=\\"2\\">Усього</th>");
+            reportBuilder1.AppendLine("<th colspan=\\"5\\">З них за категоріями (сортами)</th>");
         }
         reportBuilder1.AppendLine("</tr><tr>");
         reportBuilder1.AppendLine("<th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>");
@@ -288,13 +288,13 @@ class ProductsView(ListView):
             }
             reportBuilder1.AppendLine("</tr>");
         }
-        reportBuilder1.AppendLine("</table>\n</body>\n</html>\n");
+        reportBuilder1.AppendLine("</table>\\n</body>\\n</html>\\n");
         //Console.WriteLine(reportBuilder1.ToString());
-        File.WriteAllText(@"C:\Users\xXx\source\repos\report1.html", reportBuilder1.ToString());
+        File.WriteAllText(@"C:\\Users\\xXx\\source\\repos\\report1.html", reportBuilder1.ToString());
 
 """
 
-class ProductVariantView(View):
+class ProductVariantView(TemplateView):
     def get(self, request, *args, **kwargs):
         
         context = {'message': 'Hello Django!'}
