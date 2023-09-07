@@ -10,12 +10,12 @@ class Peer(models.Model):
     name = models.CharField(max_length=200)
 
 PRODUCT_UNIT_OF_MEASURE = (
-    (1, "Kilogramm"), # кілограм
-    (2, "Piece"),     # штука
-    (3, "Kit"),       # комплект
-    (4, "Box"),       # коробка
-    (5, "Pack"),      # пачка
-    )    
+    (1, "Kilogramm"), # РљС–Р»РѕРіСЂР°Рј
+    (2, "Piece"),     # РЁС‚СѓРєР°
+    (3, "Kit"),       # РљРѕРјРїР»РµРєС‚
+    (4, "Box"),       # РљРѕСЂРѕР±РєР°
+    (5, "Pack"),      # РџР°С‡РєР°
+    )
 class Product(models.Model):
     name = models.CharField(max_length=200)
     has_sort = models.BooleanField()
@@ -33,9 +33,42 @@ class ComplexQuantity:
     sort3_q = models.FloatField()
     sort4_q = models.FloatField()
     sort5_q = models.FloatField()
-    
-    #def increase
-    #def decrease
+
+    #def __init__(self):
+    #    self.total_q = 0.0
+    #    self.sort1_q = 0.0
+    #    self.sort2_q = 0.0
+    #    self.sort3_q = 0.0
+    #    self.sort4_q = 0.0
+    #    self.sort5_q = 0.0
+
+    def __init__(self, total_q=0.0, sort1_q=0.0, sort2_q=0.0, sort3_q=0.0, sort4_q=0.0, sort5_q=0.0):
+        self.total_q = total_q
+        self.sort1_q = sort1_q
+        self.sort2_q = sort2_q
+        self.sort3_q = sort3_q
+        self.sort4_q = sort4_q
+        self.sort5_q = sort5_q
+
+    def increase(self, value):
+        self.total_q += value.total_q
+        self.sort1_q += value.sort1_q
+        self.sort2_q += value.sort2_q
+        self.sort3_q += value.sort3_q
+        self.sort4_q += value.sort4_q
+        self.sort5_q += value.sort5_q
+
+        return self
+
+    def decrease(self, value):
+        self.total_q -= value.total_q
+        self.sort1_q -= value.sort1_q
+        self.sort2_q -= value.sort2_q
+        self.sort3_q -= value.sort3_q
+        self.sort4_q -= value.sort4_q
+        self.sort5_q -= value.sort5_q
+
+        return self
 
 COMPLEX_OPERATION = 1
 EXTERNAL_TRANSFER = 2
@@ -66,7 +99,12 @@ class DocumentProduct(models.Model):
     sort3_q = models.FloatField(default=0)
     sort4_q = models.FloatField(default=0)
     sort5_q = models.FloatField(default=0)
-    #def operation_quantity
+
+    @property
+    def operation_q(self):
+        return ComplexQuantity(total_q=self.total_q, sort1_q=self.sort1_q, sort2_q=self.sort2_q, sort3_q=self.sort3_q, sort4_q=self.sort4_q, sort5_q=self.sort5_q)
+    
+    #   set { TotalQuantity = value.TotalQuantity; Sort1Quantity = value.Sort1Quantity; Sort2Quantity = value.Sort2Quantity; Sort3Quantity = value.Sort3Quantity; Sort4Quantity = value.Sort4Quantity; Sort5Quantity = value.Sort5Quantity; }
 
     #    public virtual ICollection<OperationSubline> OperationSublines { get; private set; } =
     #        new ObservableCollection<OperationSubline>();
@@ -82,7 +120,11 @@ class OperationSubline(models.Model):
     sort3_q = models.FloatField(default=0)
     sort4_q = models.FloatField(default=0)
     sort5_q = models.FloatField(default=0)
-    #def operation_quantity
+
+    @property
+    def operation_q(self):
+        return ComplexQuantity(total_q=self.total_q, sort1_q=self.sort1_q, sort2_q=self.sort2_q, sort3_q=self.sort3_q, sort4_q=self.sort4_q, sort5_q=self.sort5_q)
+    #   set { TotalQuantity = value.TotalQuantity; Sort1Quantity = value.Sort1Quantity; Sort2Quantity = value.Sort2Quantity; Sort3Quantity = value.Sort3Quantity; Sort4Quantity = value.Sort4Quantity; Sort5Quantity = value.Sort5Quantity; }
 
 class JournalLine(models.Model):
     record_date = models.DateField()

@@ -123,3 +123,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Quick hack for settings that should not be under VCS
+# See https://stackoverflow.com/questions/33179419/private-settings-in-django-and-deployment for more info
+try:
+    from .local_settings import *
+except ImportError:
+    pass
