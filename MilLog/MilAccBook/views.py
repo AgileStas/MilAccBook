@@ -63,28 +63,30 @@ class ProductsView(ListView):
 #         return context
 
 class pv_journal_line():
-    #DateTime RecordDate;
-    record_date = None
-    #string DocumentName;
-    document_name = ''
-    #string DocumentNumber;
-    document_number = ''
-    #DateTime DocumentDate;
-    document_date = None
-    #string PeerName;
-    peer_name = ''
-    #decimal Income;
-    income = 0.0
-    #decimal Outcome;
-    outcome = 0.0
-    #ComplexQuantity Total;
-    total = ComplexQuantity()
-    #Dictionary<string, ComplexQuantity> Partitial;
-    partitial = dict()
+    def __init__(self):
+        #DateTime RecordDate;
+        self.record_date = None
+        #string DocumentName;
+        self.document_name = ''
+        #string DocumentNumber;
+        self.document_number = ''
+        #DateTime DocumentDate;
+        self.document_date = None
+        #string PeerName;
+        self.peer_name = ''
+        #decimal Income;
+        self.income = 0.0
+        #decimal Outcome;
+        self.outcome = 0.0
+        #ComplexQuantity Total;
+        self.total = ComplexQuantity()
+        #Dictionary<string, ComplexQuantity> Partitial;
+        self.partitial = dict()
+
 
 def FormatTableZeroes(val):
     return str(val) if val != 0 else ''
-
+import copy
 class ProductVariantView(TemplateView):
     def pv_page(self, pv_id):
         
@@ -111,12 +113,13 @@ class ProductVariantView(TemplateView):
             current_line.peer_name = jli.document_product.document.peer.name
 
             change_quantity = jli.document_product.operation_q
+            #print('!!! ' + str(change_quantity.total_q) + '=' + str(change_quantity.sort1_q) + '+' + str(change_quantity.sort2_q) + '+' + str(change_quantity.sort3_q) + '+' + str(change_quantity.sort4_q) + '+' + str(change_quantity.sort5_q)) 
             peer_name = jli.document_product.document.peer.name
             
             if jli.document_product.document.operation == EXTERNAL_TRANSFER:
-                main_q = jql[main_name]
-                main_q.increase(change_quantity);
-                jql[main_name] = main_q;
+                main_q = copy.copy(jql[main_name])
+                main_q.increase(change_quantity)
+                jql[main_name] = main_q
                 if (change_quantity.total_q > 0):
                     current_line.income += change_quantity.total_q;
                 else:
@@ -126,8 +129,8 @@ class ProductVariantView(TemplateView):
                 if not peer_name in jql:
                     cur_q = ComplexQuantity()
                 else:
-                    cur_q = jql[peer_name]
-                main_q = jql[main_name]
+                    cur_q = copy.copy(jql[peer_name])
+                main_q = copy.copy(jql[main_name])
                 main_q.increase(change_quantity)
                 jql[main_name] = main_q
                 cur_q.decrease(change_quantity)
@@ -137,7 +140,7 @@ class ProductVariantView(TemplateView):
                 if not peer_name in jql:
                     cur_q = ComplexQuantity()
                 else:
-                    cur_q = jql[peer_name]
+                    cur_q = copy.copy(jql[peer_name])
                 cur_q.increase(change_quantity)
                 jql[peer_name] = cur_q
             elif jli.document_product.document.operation == COMPLEX_OPERATION:
@@ -146,7 +149,7 @@ class ProductVariantView(TemplateView):
                     change_quantity = subline.operation_q
                     peer_name = subline.peer.name
                     if subline.operation == EXTERNAL_TRANSFER:
-                        main_q = jql[main_name]
+                        main_q = copy.copy(jql[main_name])
                         main_q.increase(change_quantity)
                         jql[main_name] = main_q;
                         if change_quantity.total_q > 0:
@@ -158,10 +161,10 @@ class ProductVariantView(TemplateView):
                         if not peer_name in jql:
                             cur_q = ComplexQuantity()
                         else:
-                            cur_q = jql[peer_name]
-                        main_q = jql[main_name];
+                            cur_q = copy.copy(jql[peer_name])
+                        main_q = copy.copy(jql[main_name])
                         main_q.increase(change_quantity)
-                        jql[main_name] = main_q;
+                        jql[main_name] = main_q
                         cur_q.decrease(change_quantity)
                         jql[peer_name] = cur_q
                     elif subline.operation == CATEGORY_CHANGE:
@@ -169,7 +172,7 @@ class ProductVariantView(TemplateView):
                         if not peer_name in jql:
                             cur_q = ComplexQuantity()
                         else:
-                            cur_q = jql[peer_name]
+                            cur_q = copy.copy(jql[peer_name])
                         cur_q.increase(change_quantity)
                         jql[peer_name] = cur_q
 

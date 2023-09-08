@@ -27,12 +27,12 @@ class ProductVariant(models.Model):
     # sort = models.IntegerField()
 
 class ComplexQuantity:
-    total_q = models.FloatField()
-    sort1_q = models.FloatField()
-    sort2_q = models.FloatField()
-    sort3_q = models.FloatField()
-    sort4_q = models.FloatField()
-    sort5_q = models.FloatField()
+    #total_q = models.FloatField()
+    #sort1_q = models.FloatField()
+    #sort2_q = models.FloatField()
+    #sort3_q = models.FloatField()
+    #sort4_q = models.FloatField()
+    #sort5_q = models.FloatField()
 
     #def __init__(self):
     #    self.total_q = 0.0
@@ -51,6 +51,7 @@ class ComplexQuantity:
         self.sort5_q = sort5_q
 
     def increase(self, value):
+        #print('+++ (' + str(self.total_q) + '+' + str(value.total_q) + ')=(' + str(self.sort1_q) + '+' + str(value.sort1_q) + ')+(' + str(self.sort2_q) + '+' + str(value.sort2_q) + ')+(' + str(self.sort3_q) + '+' + str(value.sort3_q) + ')+(' + str(self.sort4_q) + '+' + str(value.sort4_q) + ')+(' + str(self.sort5_q) + '+' + str(value.sort5_q) + ')')
         self.total_q += value.total_q
         self.sort1_q += value.sort1_q
         self.sort2_q += value.sort2_q
@@ -61,6 +62,7 @@ class ComplexQuantity:
         return self
 
     def decrease(self, value):
+        #print('--- (' + str(self.total_q) + '-' + str(value.total_q) + ')=(' + str(self.sort1_q) + '-' + str(value.sort1_q) + ')+(' + str(self.sort2_q) + '-' + str(value.sort2_q) + ')+(' + str(self.sort3_q) + '-' + str(value.sort3_q) + ')+(' + str(self.sort4_q) + '-' + str(value.sort4_q) + ')+(' + str(self.sort5_q) + '-' + str(value.sort5_q) + ')')
         self.total_q -= value.total_q
         self.sort1_q -= value.sort1_q
         self.sort2_q -= value.sort2_q
