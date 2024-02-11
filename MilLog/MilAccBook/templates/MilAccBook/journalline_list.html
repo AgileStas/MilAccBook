@@ -1,0 +1,14 @@
+{% block content %}
+<h1>Journal Line List</h1>
+  {% if journalline_list %}
+<ul>
+    {% for jl in journalline_list %}
+    <li>
+        <a href="{{ jl.get_absolute_url }}{{ jl.pk }}">{{ jl.document_product }} {{ jl.record_date }}</a>
+    </li>
+    {% endfor %}
+</ul>
+  {% else %}
+<p>There are no journal lines in the book.</p>
+  {% endif %}
+{% endblock %}

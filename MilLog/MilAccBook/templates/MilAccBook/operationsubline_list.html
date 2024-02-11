@@ -1,0 +1,14 @@
+{% block content %}
+<h1>Operation Subline List</h1>
+  {% if operationsubline_list %}
+<ul>
+    {% for osl in operationsubline_list %}
+    <li>
+        <a href="{{ osl.get_absolute_url }}{{ osl.pk }}">{{ osl.operation }} {{ osl.peer.name }} {{ osl.document_product.pk }} {{ osl.total_q }}</a>
+    </li>
+    {% endfor %}
+</ul>
+  {% else %}
+<p>There are no products in the book.</p>
+  {% endif %}
+{% endblock %}

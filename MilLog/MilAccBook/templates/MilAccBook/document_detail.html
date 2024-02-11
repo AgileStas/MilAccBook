@@ -1,0 +1,24 @@
+{% block content %}
+<p>Документ {{ object.pk }}: {{ object.name }} №{{ object.number }} від {{ object.date }}</p>
+<p>Підстава (мета): {{ object.base_document_str }}</p>
+<p>Тип операції документа: {{ object.operation }}</p>
+<p>Контрагент: {{ object.peer.name }}</p>
+<table>
+	<tr>
+		<th>№ з/п</th>
+		<th>Найменування</th>
+		<th>Одиниця виміру</th>
+		<th>Кількість</th>
+		<th>Проведено</th>
+	</tr>
+{% for document_product in object.documentproduct_set.all %}
+	<tr>
+		<td>{{ forloop.counter }}</td>
+		<td>{{ document_product.product_variant.product.name }} ({{ document_product.product_variant.price }} грн)</td>
+		<td>{{ document_product.product_variant.product.uom_str }}</td>
+		<td>{{ document_product.total_q }}</td>
+		<td>{{ document_product.journalline_set.first.record_date }}</td>
+	</tr>
+{% endfor %}
+</table>
+{% endblock %}

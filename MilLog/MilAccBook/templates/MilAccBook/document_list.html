@@ -1,0 +1,32 @@
+{% block content %}
+<h1>Document List</h1>
+  {% if document_list %}
+<ul>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Document date</th>
+            <th>Document name</th>
+            <th>Document number</th>
+            <th>Operation</th>
+            <th>Peer</th>
+            <th>Base document</th>
+            <th>Base document --</th>
+        </tr>
+    {% for document in document_list %}
+        <tr>
+            <td><a href="{{ document.get_absolute_url }}{{ document.pk }}/">{{ document.pk }}</a></td>
+            <td>{{ document.date }}</td>
+            <td>{{ document.name }}</td>
+            <td>{{ document.number}} </td>
+            <td>{{ document.operation }}</td>
+            <td>{{ document.peer.name }}</td>
+            <td>{{ document.base_document }}</td>
+            <td>{{ document.base_document_str }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+  {% else %}
+<p>There are no documents in the book.</p>
+  {% endif %}
+{% endblock %}

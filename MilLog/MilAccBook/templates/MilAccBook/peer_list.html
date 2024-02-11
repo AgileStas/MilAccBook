@@ -1,0 +1,14 @@
+{% block content %}
+<h1>Peer List</h1>
+  {% if peer_list %}
+<ul>
+    {% for peer in peer_list %}
+    <li>
+        <a href="{{ peer.get_absolute_url }}{{ peer.pk }}">{{ peer.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+  {% else %}
+<p>There are no peers in the book.</p>
+  {% endif %}
+{% endblock %}

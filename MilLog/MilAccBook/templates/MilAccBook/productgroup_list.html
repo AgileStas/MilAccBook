@@ -1,0 +1,14 @@
+{% block content %}
+<h1>ProductGroup List</h1>
+  {% if productgroup_list %}
+<ul>
+    {% for productgroup in productgroup_list %}
+    <li>
+        <a href="{{ productgroup.get_absolute_url }}{{ productgroup.pk }}">{{ productgroup.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+  {% else %}
+<p>There are no product groups in the book.</p>
+  {% endif %}
+{% endblock %}

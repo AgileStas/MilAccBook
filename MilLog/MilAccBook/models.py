@@ -9,6 +9,16 @@ from django.db import models
 class Peer(models.Model):
     name = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.name
+
+class ProductGroup(models.Model):
+    name = models.CharField(max_length=200)
+    parent = models.ForeignKey("self", on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
 PRODUCT_UNIT_OF_MEASURE = (
     (1, "Kilogramm"), # Кілограм
     (2, "Piece"),     # Штука
@@ -16,10 +26,30 @@ PRODUCT_UNIT_OF_MEASURE = (
     (4, "Box"),       # Коробка
     (5, "Pack"),      # Пачка
     )
+
+def UOM_STR(uom_id):
+    if uom_id == 1:
+        return 'кг'
+    elif uom_id == 2:
+        return 'шт'
+    elif uom_id == 3:
+        return 'к-т'
+    elif uom_id == 4:
+        return 'коробка'
+    elif uom_id == 5:
+        return 'пачка'
+    else:
+        return 'UNKNOWN'
+
 class Product(models.Model):
     name = models.CharField(max_length=200)
     has_sort = models.BooleanField()
     uom = models.IntegerField(choices=PRODUCT_UNIT_OF_MEASURE)
+
+    group = models.ForeignKey(ProductGroup, on_delete=models.CASCADE)
+
+    def uom_str(self):
+        return UOM_STR(self.uom)
 
 class ProductVariant(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -89,7 +119,7 @@ class Document(models.Model):
     operation = models.IntegerField(choices=OPERATION_TYPE)
     peer = models.ForeignKey(Peer, on_delete=models.CASCADE)
     base_document = models.ForeignKey('self', null=True, on_delete=models.CASCADE)
-    base_document_str = models.CharField(max_length=200, null=True)
+    base_document_str = models.CharField(max_length=200, null=True, blank=True)
 
 class DocumentProduct(models.Model):
     document = models.ForeignKey(Document, on_delete=models.CASCADE)
@@ -105,7 +135,7 @@ class DocumentProduct(models.Model):
     @property
     def operation_q(self):
         return ComplexQuantity(total_q=self.total_q, sort1_q=self.sort1_q, sort2_q=self.sort2_q, sort3_q=self.sort3_q, sort4_q=self.sort4_q, sort5_q=self.sort5_q)
-    
+
     #   set { TotalQuantity = value.TotalQuantity; Sort1Quantity = value.Sort1Quantity; Sort2Quantity = value.Sort2Quantity; Sort3Quantity = value.Sort3Quantity; Sort4Quantity = value.Sort4Quantity; Sort5Quantity = value.Sort5Quantity; }
 
     #    public virtual ICollection<OperationSubline> OperationSublines { get; private set; } =

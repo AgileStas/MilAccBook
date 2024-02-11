@@ -9,3 +9,4 @@ lib
 lib64
 obj
 pyvenv.cfg
+MilLog/MilLog/local_settings.py

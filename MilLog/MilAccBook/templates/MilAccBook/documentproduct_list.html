@@ -1,0 +1,14 @@
+{% block content %}
+<h1>DocumentProduct List</h1>
+  {% if documentproduct_list %}
+<ul>
+    {% for dp in documentproduct_list %}
+    <li>
+        <a href="{{ dp.get_absolute_url }}{{ dp.pk }}">{{ dp.product_variant.product.name }} {{ dp.product_variant.price }} -- {{ dp.total_q }} -- {{ dp.document.name }} №{{ dp.document.number }} - {{ dp.document.date }}</a>
+    </li>
+    {% endfor %}
+</ul>
+  {% else %}
+<p>There are no document products in the book.</p>
+  {% endif %}
+{% endblock %}
