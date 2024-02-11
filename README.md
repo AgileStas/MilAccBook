@@ -7,6 +7,8 @@ cd MilAccBook
 . bin/activate
 cd MilLog
 pip install -r requirements.txt
+# Set main peer name for your installation. !!! Replace MY_MAIN_PEER_NAME with your main peer name
+echo "MILACCBOOK_MAIN_PEER_NAME = 'MY_MAIN_PEER_NAME'" > MilLog/local_settings.py
 ./manage.py makemigrations
 ./manage.py migrate
 ./manage.py makemigrations MilAccBook
